@@ -41,3 +41,29 @@ class WeatherModel{
 });
 
 }
+
+class WeatherState {
+  final bool isLoading;
+  final String errorMessage;
+  final WeatherModel? weather; // 1. Isse nullable (?) banaya kyunki shuru mein data nahi hota
+
+  WeatherState({
+    required this.isLoading,
+    required this.errorMessage,
+    this.weather, // 2. required hata diya kyunki shuru mein ye null ho sakta hai
+  });
+
+
+  WeatherState copyWith({
+    bool? isLoading,
+    String? errorMessage,
+    WeatherModel? weather,
+  }) {
+    // 4. Return ke baad constructor call mein () aayega, {} nahi
+    return WeatherState(
+      isLoading: isLoading ?? this.isLoading,
+      errorMessage: errorMessage ?? this.errorMessage,
+      weather: weather ?? this.weather,
+    );
+  }
+}
