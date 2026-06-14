@@ -40,6 +40,30 @@ class WeatherModel{
     required this.main,
 });
 
+  factory WeatherModel.fromJson(Map<String,dynamic> json){
+    final data0 = json['data'][0];
+    final weather0 = json['weather'][0];
+
+    return WeatherModel(
+      cityName: json['timezone'],
+      countryName: "Global",
+
+      condition:WeatherConditions(
+        main: weather0['main'],
+        description: weather0['description'],
+      ),
+      main: MainWeatherData(
+        temperature: data0['temp'].toDouble(),
+        feelsLike: data0['feels_like'].toDouble(),
+        tempMin: data0['temp'].toDouble(),
+        tempMax: data0['temp'].toDouble(),
+        pressure: data0['pressure'],
+        humidity: data0['humidity'],
+
+      ),
+    );
+  }
+
 }
 
 class WeatherState {
